@@ -70,5 +70,17 @@ namespace TwitchTextToVoice {
                 this["todos"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string channelToJoin {
+            get {
+                return ((string)(this["channelToJoin"]));
+            }
+            set {
+                this["channelToJoin"] = value;
+            }
+        }
     }
 }

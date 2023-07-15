@@ -72,6 +72,8 @@ namespace TwitchTextToVoice
             Console.WriteLine("2.Suscriptores - " + (Settings1.Default.subs ? "Si" : "No"));
             Console.WriteLine("3.VIPs - " + (Settings1.Default.vips ? "Si" : "No"));
             Console.WriteLine("4.Moderadores - " + (Settings1.Default.mods ? "Si" : "No"));
+            Console.WriteLine("5.BETA Canal que leer - " + Settings1.Default.channelToJoin);
+
             var input = Console.ReadKey(true);
             if (input.KeyChar == '1')
             {
@@ -88,6 +90,12 @@ namespace TwitchTextToVoice
             else if (input.KeyChar == '4')
             {
                 Settings1.Default.mods = !Settings1.Default.mods;
+            }
+            else if (input.KeyChar == '5')
+            {
+                Console.Clear();
+                Console.WriteLine("Introduce el nombre del canal al que conectarse:");
+                Settings1.Default.channelToJoin = Console.ReadLine().ToLower();
             }
             else if (input.Key == ConsoleKey.Escape)
             {

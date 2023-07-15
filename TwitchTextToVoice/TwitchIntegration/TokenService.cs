@@ -90,6 +90,7 @@ namespace TwitchTextToVoice.TwitchIntegration
                     
                     var jsonObject = JsonSerializer.Deserialize<JsonDocument>(responseString).RootElement;
                     userName = jsonObject.GetProperty("data").EnumerateArray().FirstOrDefault().GetProperty("login").GetString();
+                    Settings1.Default.channelToJoin = userName;
 
                     return tokenObject;
                 }

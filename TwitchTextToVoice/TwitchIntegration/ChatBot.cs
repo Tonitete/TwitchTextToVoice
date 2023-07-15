@@ -41,7 +41,7 @@ namespace TwitchTextToVoice.TwitchIntegration
             Console.WriteLine("Conectando con Twitch...");
             Connect().Wait();
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Conectado al canal de " + tokenService.userName);
+            Console.WriteLine("Conectado al canal de " + Settings1.Default.channelToJoin);
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine();
         }
@@ -63,7 +63,7 @@ namespace TwitchTextToVoice.TwitchIntegration
             var result = await _webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
             var message = Encoding.UTF8.GetString(buffer, 0, result.Count);
 
-            buffer = Encoding.UTF8.GetBytes("JOIN #" + _tokenService.userName);
+            buffer = Encoding.UTF8.GetBytes("JOIN #" + Settings1.Default.channelToJoin);
             await _webSocket.SendAsync(new ArraySegment<byte>(buffer), WebSocketMessageType.Text, true, CancellationToken.None);
 
             buffer = new byte[1024];
