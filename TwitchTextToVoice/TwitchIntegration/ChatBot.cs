@@ -93,8 +93,21 @@ namespace TwitchTextToVoice.TwitchIntegration
                     else
                     {
                         var parsedMessage = ParseMessage(message);
-                        if (parsedMessage.Command.Contains("PRIVMSG"))
+                        int indx = parsedMessage.Source.IndexOf("!");
+                        var usernameSender = parsedMessage.Source.Substring(0, indx).ToLower();
+
+                        if (parsedMessage.Command.Contains("PRIVMSG") && !Settings1.Default.usersBanned.Contains(usernameSender))
                         {
+
+                            if (Settings1.Default.commandRequired && !parsedMessage.Parameters.StartsWith("!" + Settings1.Default.commandText + " "))
+                            {
+                                continue;
+                            }
+                            else if (Settings1.Default.commandRequired)
+                            {
+                                parsedMessage.Parameters = parsedMessage.Parameters.Substring(2 + Settings1.Default.commandText.Length);
+                            }
+
                             if (Settings1.Default.todos)
                             {
                                 string user = parsedMessage.Source.Substring(0, parsedMessage.Source.IndexOf('!'));

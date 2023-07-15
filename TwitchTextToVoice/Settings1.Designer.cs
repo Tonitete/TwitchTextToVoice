@@ -82,5 +82,40 @@ namespace TwitchTextToVoice {
                 this["channelToJoin"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection usersBanned {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["usersBanned"]));
+            }
+            set {
+                this["usersBanned"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool commandRequired {
+            get {
+                return ((bool)(this["commandRequired"]));
+            }
+            set {
+                this["commandRequired"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("tts")]
+        public string commandText {
+            get {
+                return ((string)(this["commandText"]));
+            }
+            set {
+                this["commandText"] = value;
+            }
+        }
     }
 }

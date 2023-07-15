@@ -7,6 +7,11 @@ namespace TwitchTextToVoice
     {
         static void Main(string[] args)
         {
+            if (Settings1.Default.usersBanned == null)
+            {
+                Settings1.Default.usersBanned = new System.Collections.Specialized.StringCollection();
+                Settings1.Default.Save();
+            }
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Title = "Twitch text to voice";
             Console.CursorVisible = false;
@@ -73,6 +78,9 @@ namespace TwitchTextToVoice
             Console.WriteLine("3.VIPs - " + (Settings1.Default.vips ? "Si" : "No"));
             Console.WriteLine("4.Moderadores - " + (Settings1.Default.mods ? "Si" : "No"));
             Console.WriteLine("5.BETA Canal que leer - " + Settings1.Default.channelToJoin);
+            Console.WriteLine("6.Leer solo comandos (ej. !tts) - " + (Settings1.Default.commandRequired ? "Si" : "No"));
+            Console.WriteLine("7.Texto del comando - !" + Settings1.Default.commandText);
+            Console.WriteLine("8.Ver usuarios baneados");
 
             var input = Console.ReadKey(true);
             if (input.KeyChar == '1')
@@ -94,11 +102,74 @@ namespace TwitchTextToVoice
             else if (input.KeyChar == '5')
             {
                 Console.Clear();
-                Console.WriteLine("Introduce el nombre del canal al que conectarse:");
+                Console.WriteLine("Introduce el nombre del canal al que conectarse y pulsa enter:");
                 Settings1.Default.channelToJoin = Console.ReadLine().ToLower();
+            }
+            else if (input.KeyChar == '6')
+            {
+                Settings1.Default.commandRequired = !Settings1.Default.commandRequired;
+            }
+            else if (input.KeyChar == '7')
+            {
+                Console.Clear();
+                Console.WriteLine("Introduce el nombre del comando (sin el simbolo de exclamación) y pulsa enter:");
+                Settings1.Default.commandText = Console.ReadLine().ToLower();
+            }
+            else if (input.KeyChar == '8')
+            {
+                while (true)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Lista de usuarios baneados:");
+                    Console.WriteLine();
+                    string[] strArray = new string[Settings1.Default.usersBanned.Count];
+                    Settings1.Default.usersBanned.CopyTo(strArray, 0);
+                    string text = string.Join(", ", strArray);
+                    Console.WriteLine($"{text}");
+                    Console.WriteLine();
+                    Console.WriteLine("1.Añadir nuevo usuario    2.Borrar usuario    3.Volver");
+
+                    char input2 = Console.ReadKey(true).KeyChar;
+                    if (input2 == '1')
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Escribe el nombre del usuario y pulsa enter para banearlo.");
+                        string newUserBanned = Console.ReadLine().ToLower();
+                        Settings1.Default.usersBanned.Add(newUserBanned);
+                    }
+                    else if (input2 == '2')
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Lista de usuarios baneados:");
+                        Console.WriteLine();
+                        strArray = new string[Settings1.Default.usersBanned.Count];
+                        Settings1.Default.usersBanned.CopyTo(strArray, 0);
+                        Console.WriteLine(string.Join(", ", strArray));
+                        Console.WriteLine();
+                        Console.WriteLine("Escribe el nombre de un usuario y pulsa enter para borrarlo de la lista:");
+                        string userToDelete = Console.ReadLine();
+                        try
+                        {
+                            Settings1.Default.usersBanned.Remove(userToDelete.ToLower());
+                        }
+                        catch 
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("No se ha podido borrar al usuario, está escrito incorrectamente o este no existe.");
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            Console.WriteLine("Pulsa cualquier tecla para continuar.");
+                            Console.ReadKey(true);
+                        }
+                    }
+                    else if (input2 == '3')
+                    {
+                        break;
+                    }
+                }
             }
             else if (input.Key == ConsoleKey.Escape)
             {
+                Settings1.Default.Save();
                 return false;
             }
             return true;
