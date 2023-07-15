@@ -40,7 +40,10 @@ namespace TwitchTextToVoice.TwitchIntegration
 
             Console.WriteLine("Conectando con Twitch...");
             Connect().Wait();
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Conectado al canal de " + tokenService.userName);
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine();
         }
 
         private async Task Connect()
