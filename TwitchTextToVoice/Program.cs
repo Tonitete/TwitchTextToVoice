@@ -26,6 +26,14 @@ namespace TwitchTextToVoice
             }
             else
             {
+                Menu(tokenService);
+            }
+        }
+
+        static void Menu(TokenService tokenService)
+        {
+            while (true)
+            {
                 Console.Clear();
                 Console.WriteLine("**************************************************************************************************************");
                 Console.WriteLine();
@@ -34,18 +42,14 @@ namespace TwitchTextToVoice
                 Console.WriteLine();
                 Console.WriteLine("Seleccione una opción:");
                 Console.WriteLine("1.Empezar    2.Opciones    3.Salir");
-            }
-
-            while (true)
-            {
                 char input = Console.ReadKey(true).KeyChar;
                 if (input == '1')
                 {
-
+                    Application(tokenService);
                 }
                 else if (input == '2')
                 {
-                    Settings();
+                    while (Settings()) continue;
                 }
                 else if (input == '3')
                 {
@@ -54,22 +58,65 @@ namespace TwitchTextToVoice
             }
         }
 
-        static void Settings()
+        static bool Settings()
         {
             Console.Clear();
             Console.WriteLine("**************************************************************************************************************");
             Console.WriteLine();
             Console.WriteLine("                                 AJUSTES");
             Console.WriteLine();
-            Console.WriteLine("Introduce un número para cambiar el ajuste:");
+            Console.WriteLine("Selecciona de quien se leeran los mensajes en voz alta.");
+            Console.WriteLine("Introduce un número para cambiar el ajuste, ESC para volver.");
             Console.WriteLine();
-            Console.WriteLine("1.Nombre de usuario");
-            Console.WriteLine("2.Codigo de validación");
+            Console.WriteLine("1.Todos - " + (Settings1.Default.todos ? "Si" : "No"));
+            Console.WriteLine("2.Suscriptores - " + (Settings1.Default.subs ? "Si" : "No"));
+            Console.WriteLine("3.VIPs - " + (Settings1.Default.vips ? "Si" : "No"));
+            Console.WriteLine("4.Moderadores - " + (Settings1.Default.mods ? "Si" : "No"));
+            var input = Console.ReadKey(true);
+            if (input.KeyChar == '1')
+            {
+                Settings1.Default.todos = !Settings1.Default.todos;
+            }
+            else if (input.KeyChar == '2')
+            {
+                Settings1.Default.subs = !Settings1.Default.subs;
+            }
+            else if (input.KeyChar == '3')
+            {
+                Settings1.Default.vips = !Settings1.Default.vips;
+            }
+            else if (input.KeyChar == '4')
+            {
+                Settings1.Default.mods = !Settings1.Default.mods;
+            }
+            else if (input.Key == ConsoleKey.Escape)
+            {
+                return false;
+            }
+            return true;
         }
 
-        static void Application()
+        static void Application(TokenService tokenService)
         {
+            Console.Clear();
+            Console.WriteLine("**************************************************************************************************************");
+            Console.WriteLine();
+            Console.WriteLine("                                 LEYENDO CHAT");
+            Console.WriteLine();
+            Console.WriteLine("Pulsa ESC para detener la lectura y volver al menú.");
+            ChatBot bot = new ChatBot(tokenService);
+            CancellationTokenSource tokenSource = new CancellationTokenSource();
+            Thread t = new Thread(() => bot.Communicate(tokenSource.Token));
+            t.Start();
 
+
+
+            while (Console.ReadKey(true).Key != ConsoleKey.Escape) continue;
+
+            tokenSource.Cancel();
+            t.Join();
+            tokenSource.Dispose();
+            bot.Disconnect();
         }
     }
 }

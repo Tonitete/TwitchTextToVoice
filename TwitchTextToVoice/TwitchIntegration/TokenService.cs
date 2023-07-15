@@ -3,6 +3,7 @@ using System.Net;
 using System.Runtime.InteropServices;
 using System.Text.Encodings.Web;
 using System.Text.Json;
+using System.Text.Json.Nodes;
 
 namespace TwitchTextToVoice.TwitchIntegration
 {
@@ -13,9 +14,11 @@ namespace TwitchTextToVoice.TwitchIntegration
         string baseurl = "https://id.twitch.tv/oauth2/authorize?";
         string baseurlToken = "https://id.twitch.tv/oauth2/token";
         public TokenResponseEntity tokenEntity;
+        public string userName;
 
         public TokenService()
         {
+            userName = string.Empty;
             tokenEntity = GetUserToken();
         }
 
@@ -79,6 +82,15 @@ namespace TwitchTextToVoice.TwitchIntegration
                     {
                         return new TokenResponseEntity { error = "Error no controlado" };
                     }
+
+                    httpclient.DefaultRequestHeaders.Add("Authorization", $"Bearer {tokenObject.access_token}");
+                    httpclient.DefaultRequestHeaders.Add("Client-Id", clientID);
+                    response = httpclient.GetAsync("https://api.twitch.tv/helix/users").Result;
+                    responseString = response.Content.ReadAsStringAsync().Result;
+                    
+                    var jsonObject = JsonSerializer.Deserialize<JsonDocument>(responseString).RootElement;
+                    userName = jsonObject.GetProperty("data").EnumerateArray().FirstOrDefault().GetProperty("login").GetString();
+
                     return tokenObject;
                 }
             }
