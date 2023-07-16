@@ -80,6 +80,7 @@ namespace TwitchTextToVoice
             Console.WriteLine("6.Leer solo comandos (ej. !tts) - " + (Settings1.Default.commandRequired ? "Si" : "No"));
             Console.WriteLine("7.Texto del comando - !" + Settings1.Default.commandText);
             Console.WriteLine("8.Ver usuarios baneados");
+            Console.WriteLine("9.Leer nombre de usuario - " + (Settings1.Default.leerNombreDeUsuario ? "Si" : "No"));
 
             var input = Console.ReadKey(true);
             if (input.KeyChar == '1')
@@ -165,6 +166,10 @@ namespace TwitchTextToVoice
                         break;
                     }
                 }
+            }
+            else if (input.KeyChar == '9')
+            {
+                Settings1.Default.leerNombreDeUsuario = !Settings1.Default.leerNombreDeUsuario;
             }
             else if (input.Key == ConsoleKey.Escape)
             {

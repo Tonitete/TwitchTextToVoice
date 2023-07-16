@@ -117,5 +117,17 @@ namespace TwitchTextToVoice {
                 this["commandText"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool leerNombreDeUsuario {
+            get {
+                return ((bool)(this["leerNombreDeUsuario"]));
+            }
+            set {
+                this["leerNombreDeUsuario"] = value;
+            }
+        }
     }
 }

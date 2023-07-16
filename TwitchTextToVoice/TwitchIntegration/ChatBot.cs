@@ -91,6 +91,7 @@ namespace TwitchTextToVoice.TwitchIntegration
 
                         if (parsedMessage.Command.Contains("PRIVMSG") && !Settings1.Default.usersBanned.Contains(usernameSender))
                         {
+                            string textToType = usernameSender + " - " + parsedMessage.Parameters;
 
                             if (Settings1.Default.commandRequired && !parsedMessage.Parameters.StartsWith("!" + Settings1.Default.commandText + " "))
                             {
@@ -99,30 +100,32 @@ namespace TwitchTextToVoice.TwitchIntegration
                             else if (Settings1.Default.commandRequired)
                             {
                                 parsedMessage.Parameters = parsedMessage.Parameters.Substring(2 + Settings1.Default.commandText.Length);
+                                textToType = usernameSender + " - " + parsedMessage.Parameters;
+                            }
+
+                            if (Settings1.Default.leerNombreDeUsuario)
+                            {
+                                parsedMessage.Parameters = usernameSender + " dice: " + parsedMessage.Parameters;
                             }
 
                             if (Settings1.Default.todos)
                             {
-                                string user = parsedMessage.Source.Substring(0, parsedMessage.Source.IndexOf('!'));
-                                Console.WriteLine(user + " - " + parsedMessage.Parameters);
                                 textToRead.Add(parsedMessage.Parameters);
+                                Console.WriteLine(textToType);
                             }
                             else if (Settings1.Default.mods && parsedMessage.Tags.Contains("moderator=1"))
                             {
-                                string user = parsedMessage.Source.Substring(0, parsedMessage.Source.IndexOf('!'));
-                                Console.WriteLine(user + " - " + parsedMessage.Parameters);
+                                Console.WriteLine(textToType);
                                 textToRead.Add(parsedMessage.Parameters);
                             }
                             else if (Settings1.Default.subs && parsedMessage.Tags.Contains("subscriber=1"))
                             {
-                                string user = parsedMessage.Source.Substring(0, parsedMessage.Source.IndexOf('!'));
-                                Console.WriteLine(user + " - " + parsedMessage.Parameters);
+                                Console.WriteLine(textToType);
                                 textToRead.Add(parsedMessage.Parameters);
                             }
                             else if (Settings1.Default.vips && parsedMessage.Tags.Contains("vip=1"))
                             {
-                                string user = parsedMessage.Source.Substring(0, parsedMessage.Source.IndexOf('!'));
-                                Console.WriteLine(user + " - " + parsedMessage.Parameters);
+                                Console.WriteLine(textToType);
                                 textToRead.Add(parsedMessage.Parameters);
                             }
                         }
