@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Speech.Synthesis;
-using System.Globalization;
-using Websocket.Client;
+﻿using System.Globalization;
 using System.Net.WebSockets;
-using System.Text.Json;
-using Websocket.Client.Exceptions;
+using System.Speech.Synthesis;
+using System.Text;
 
 namespace TwitchTextToVoice.TwitchIntegration
 {
@@ -27,10 +20,10 @@ namespace TwitchTextToVoice.TwitchIntegration
         ClientWebSocket _webSocket;
 
         private TokenService _tokenService;
-        
 
-        public ChatBot(TokenService tokenService) 
-        { 
+
+        public ChatBot(TokenService tokenService)
+        {
             _tokenService = tokenService;
             textToRead = new List<string>();
             cancellReading = new CancellationTokenSource();
@@ -146,7 +139,7 @@ namespace TwitchTextToVoice.TwitchIntegration
             cancellReading.Cancel();
             _webSocket.Dispose();
         }
-        
+
         private void ReadMessagesToVoice(CancellationToken cancellationToken)
         {
             while (!cancellationToken.IsCancellationRequested)
@@ -193,7 +186,7 @@ namespace TwitchTextToVoice.TwitchIntegration
             {
                 endIdx = message.Length;
             }
-            
+
             rawCommandComponent = message.Substring(idx, endIdx - idx).Trim();
 
             if (endIdx != message.Length)

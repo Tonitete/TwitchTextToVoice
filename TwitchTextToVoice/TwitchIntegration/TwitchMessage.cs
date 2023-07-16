@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TwitchTextToVoice.TwitchIntegration
+﻿namespace TwitchTextToVoice.TwitchIntegration
 {
     public class TwitchMessage
     {
-        public TwitchMessage() 
+        public TwitchMessage()
         {
             Tags = string.Empty;
             Source = string.Empty;

@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using TwitchTextToVoice.TwitchIntegration;
+﻿using TwitchTextToVoice.TwitchIntegration;
 
 namespace TwitchTextToVoice
 {
@@ -17,7 +16,7 @@ namespace TwitchTextToVoice
             Console.CursorVisible = false;
 
             Console.WriteLine("Se va a abrir una ventana en el navegador para autorizar la aplicación.");
-            
+
 
             TokenService tokenService = new TokenService();
             if (tokenService.tokenEntity.error != null)
@@ -152,7 +151,7 @@ namespace TwitchTextToVoice
                         {
                             Settings1.Default.usersBanned.Remove(userToDelete.ToLower());
                         }
-                        catch 
+                        catch
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("No se ha podido borrar al usuario, está escrito incorrectamente o este no existe.");

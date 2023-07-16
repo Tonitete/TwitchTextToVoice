@@ -3,7 +3,6 @@ using System.Net;
 using System.Runtime.InteropServices;
 using System.Text.Encodings.Web;
 using System.Text.Json;
-using System.Text.Json.Nodes;
 
 namespace TwitchTextToVoice.TwitchIntegration
 {
@@ -87,7 +86,7 @@ namespace TwitchTextToVoice.TwitchIntegration
                     httpclient.DefaultRequestHeaders.Add("Client-Id", clientID);
                     response = httpclient.GetAsync("https://api.twitch.tv/helix/users").Result;
                     responseString = response.Content.ReadAsStringAsync().Result;
-                    
+
                     var jsonObject = JsonSerializer.Deserialize<JsonDocument>(responseString).RootElement;
                     userName = jsonObject.GetProperty("data").EnumerateArray().FirstOrDefault().GetProperty("login").GetString();
                     Settings1.Default.channelToJoin = userName;
