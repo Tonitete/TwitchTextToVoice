@@ -8,8 +8,8 @@ namespace TwitchTextToVoice.TwitchIntegration
 {
     public class TokenService
     {
-        string secret = "33ecm02di5du4ixb8fjugdpa5ifhy5";
-        string clientID = "e8cjlsdxanqiy2ckf2ucuffyfanz8s";
+        string secret = "aaaa"; // Your client secret
+        string clientID = "aaaa"; // Your client ID
         string baseurl = "https://id.twitch.tv/oauth2/authorize?";
         string baseurlToken = "https://id.twitch.tv/oauth2/token";
         public TokenResponseEntity tokenEntity;
