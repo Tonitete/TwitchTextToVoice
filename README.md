@@ -5,7 +5,7 @@ Pequeño programa para Windows para leer el chat de Twitch en voz alta.
 
 ## Configuración
 
-![imagen](https://github.com/Tonitete/TwitchTextToVoice/assets/109823823/22285a65-11fa-423f-bc9a-e38bef1a0afb)
+![imagen](https://i.imgur.com/kqQFamQ.png)
 
   1. Todos - Se leeran todos los mensajes, este ajuste sobreescribe el de Suscriptores, VIPs y Moderadores.
   2. Suscriptores - Se leeran los mensajes de Suscriptores del canal al que se conecte.
