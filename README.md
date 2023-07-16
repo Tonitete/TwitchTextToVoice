@@ -27,6 +27,9 @@ En total hay tres archivos, el ejecutable y dos de configuración, y pesa menos 
 
 Si te gusta lo que hago puedes apoyarme tanto en Paypal con una donación de tu gusto, como en Twitch con una sub, o si no quieres gastar dinero compartir mi trabajo con otras personas también me apoya enormemente. Muchas gracias!
 
+[PayPal](https://paypal.me/tonitetelol)
+[Twitch](https://www.twitch.tv/tonitete)
+
 <br><br>
 ## Siguientes pasos
 
