@@ -14,7 +14,7 @@ Pequeño programa para Windows para leer el chat de Twitch en voz alta.
   5. Canal que leer - Función BETA, especifica el canal al que conectarse, por defecto se conectará al canal de la persona que se haya autenticado. Si pones un canal inexistente no se leera nada y puede que Twitch te desconecte, por lo que habrá que salir de la aplicación y volver a entrar.
   6. Leer solo comandos - Especifica si solo se leeran los mensajes que empiezen por un comando en concreto.
   7. Texto del comando - El texto del comando que se buscará al inicio del mensaje.
-  8. Ver usuarios baneados - Te permite ver la lista de usuarios que has baneado, además de añadir o quitar usuarios de la lista.
+  8. Ver usuarios baneados - Te permite ver la lista de usuarios que has baneado, además de añadir o quitar usuarios de la lista. (Recomiendo banear a los bots para que no se lean sus mensajes, ya que suelen ser moderadores del chat)
   9. Leer nombre de usuario - Si está activo se leera "\<usuario\> dice: \<mensaje\>", de lo contrario solo se leera el mensaje.
 
    <br><br>
