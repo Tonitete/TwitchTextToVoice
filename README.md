@@ -15,7 +15,7 @@ Pequeño programa para Windows para leer el chat de Twitch en voz alta.
   6. Leer solo comandos - Especifica si solo se leeran los mensajes que empiezen por un comando en concreto.
   7. Texto del comando - El texto del comando que se buscará al inicio del mensaje.
   8. Ver usuarios baneados - Te permite ver la lista de usuarios que has baneado, además de añadir o quitar usuarios de la lista.
-  9. Leer nombre de usuario - Si está activo se leera "\<usuario> dice: \<mensaje>", de lo contrario solo se leera el mensaje.
+  9. Leer nombre de usuario - Si está activo se leera "\<usuario\> dice: \<mensaje\>", de lo contrario solo se leera el mensaje.
 
    <br><br>
 ## Instalación
@@ -34,5 +34,5 @@ Actualizaciones planeadas:
 1. Traducción al inglés.
 2. Personalización del color del texto.
 
-<br>
+
 Si quieres sugerir algún cambio lo puedes hacer [aquí](https://github.com/Tonitete/TwitchTextToVoice/issues).
