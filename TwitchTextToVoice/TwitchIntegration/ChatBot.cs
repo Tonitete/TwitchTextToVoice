@@ -113,7 +113,7 @@ namespace TwitchTextToVoice.TwitchIntegration
                                 textToRead.Add(parsedMessage.Parameters);
                                 Console.WriteLine(textToType);
                             }
-                            else if (Settings1.Default.mods && parsedMessage.Tags.Contains("moderator=1"))
+                            else if (Settings1.Default.mods && parsedMessage.Tags.Contains("mod=1"))
                             {
                                 Console.WriteLine(textToType);
                                 textToRead.Add(parsedMessage.Parameters);
@@ -153,6 +153,7 @@ namespace TwitchTextToVoice.TwitchIntegration
                     builder.StartVoice(new CultureInfo("es-ES"));
                     builder.AppendText(textToRead[0]);
                     builder.EndVoice();
+                    synt.Volume = Settings1.Default.volume;
                     synt.Speak(builder);
                     builder.ClearContent();
                     textToRead.RemoveAt(0);

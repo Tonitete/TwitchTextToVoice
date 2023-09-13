@@ -45,7 +45,7 @@ namespace TwitchTextToVoice
                 Console.WriteLine("Si se ha abierto una ventana en el navegador ya puedes cerrarla.");
                 Console.WriteLine();
                 Console.WriteLine("Seleccione una opción:");
-                Console.WriteLine("1.Empezar    2.Opciones    3.Salir");
+                Console.WriteLine("1.Empezar    2.Opciones    3.Salir   4.Volumen: " + Settings1.Default.volume.ToString() + "%");
                 char input = Console.ReadKey(true).KeyChar;
                 if (input == '1')
                 {
@@ -58,6 +58,22 @@ namespace TwitchTextToVoice
                 else if (input == '3')
                 {
                     Environment.Exit(0);
+                }
+                else if (input == '4')
+                {
+                    Console.Clear();
+                    Console.WriteLine("**************************************************************************************************************");
+                    Console.WriteLine();
+                    Console.WriteLine("Introduce un número del 0 al 100 y pulsa enter para aplicar.");
+                    string textInput = Console.ReadLine();
+                    int volume;
+                    if (int.TryParse(textInput, out volume))
+                    {
+                        if (volume < 0) volume = 0;
+                        else if (volume > 100) volume = 100;
+                        Settings1.Default.volume = volume;
+                        Settings1.Default.Save();
+                    }
                 }
             }
         }
