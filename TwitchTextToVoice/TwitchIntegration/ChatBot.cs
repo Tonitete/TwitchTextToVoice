@@ -8,7 +8,6 @@ namespace TwitchTextToVoice.TwitchIntegration
     public class ChatBot
     {
         private string WebsocketURL = "wss://irc-ws.chat.twitch.tv:443";
-        private string socketID = string.Empty;
 
         private Thread voiceReader;
         private List<string> textToRead;
